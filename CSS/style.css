@@ -1,0 +1,469 @@
+/*  import google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
+
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+.col-p-manual {
+    width: 50%;
+}
+.col-img-manual {
+    width: 38.2%;
+}
+/* grid handling */
+[class*="col-"] {
+    float: left;
+    padding: 0 30px;
+}
+
+.col-1 {
+    width: 4.16%;
+}
+.col-2 {
+    width: 8.33%;
+}
+.col-3 {
+    width: 12.5%;
+}
+.col-4 {
+    width: 16.66%;
+}
+.col-5 {
+    width: 20.83%;
+}
+.col-6 {
+    width: 25%;
+}
+.col-7 {
+    width: 29.16%;
+}
+.col-8 {
+    width: 33.33%;
+}
+.col-9 {
+    width: 37.5%;
+}
+.col-10 {
+    width: 41.66%;
+}
+.col-11 {
+    width: 45.83%;
+}
+.col-12 {
+    width: 50%;
+}
+.col-13 {
+    width: 54.16%;
+}
+.col-14 {
+    width: 58.33%;
+}
+.col-15 {
+    width: 62.5%;
+}
+.col-16 {
+    width: 66.66%;
+}
+.col-17 {
+    width: 70.83%;
+}
+.col-18 {
+    width: 75%;
+}
+.col-19 {
+    width: 79.16%;
+}
+.col-20 {
+    width: 83.33%;
+}
+.col-21 {
+    width: 87.5%;
+}
+.col-22 {
+    width: 91.66%;
+}
+.col-23 {
+    width: 95.83%;
+}
+.col-24 {
+    width: 100%;
+}
+/* custom scroll bar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* section styling */
+
+section.about {
+    padding: 150px 0;
+    margin-bottom: 70px;
+}
+section.contact {
+    padding: 150px 0;
+}
+
+/* all similar content styling codes */
+.helper {
+    color: #fff;
+}
+.max-width {
+    max-width: 1750px;
+    width: 91%;
+    margin: auto;
+}
+.grid,
+.about,
+.contact,
+footer {
+    font-family: "Figtree", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+/* about section styling */
+.about-content {
+    --img-gap: 20px;
+    --img-offset: 60px;
+    display: flex;
+    align-items: flex-start;
+    gap: 80px;
+}
+.about-images {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--img-gap);
+    flex-shrink: 0;
+    width: 45%;
+}
+
+.about-text .about-title {
+    font-weight: 700;
+}
+.about-images img {
+    width: calc(50% - var(--img-gap) / 2);
+    object-fit: cover;
+}
+.about-images img:nth-child(2) {
+    margin-top: var(--img-offset);
+}
+.about-text {
+    flex: 1;
+}
+.about-text p {
+    color: #be3455;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    margin-right: 40px;
+}
+
+/* contact section styling */
+.contact {
+    min-height: 100vh;
+    background-color: #f7f3e3;
+    display: flex;
+    align-items: center;
+}
+.contact-content {
+    margin-top: -30px;
+    display: flex;
+    justify-content: center;
+}
+
+.contact-picture {
+    display: none;
+    overflow: hidden;
+}
+
+@keyframes contact-picture-rise {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.contact-picture img {
+    opacity: 0;
+}
+
+.contact-picture.in-view img {
+    animation: contact-picture-rise 0.5s ease both;
+}
+
+.contact-content .img-wrap {
+    position: relative;
+    height: 460px;
+}
+.contact-content .img-wrap img {
+    position: relative;
+    bottom: 0;
+}
+.contact .contact-content .info {
+    color: #be3455;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 1.3;
+    text-align: center;
+}
+.contact .contact-content .info a {
+    color: #be3455;
+    font-size: 106px;
+    text-align-last: center;
+}
+.contact :hover {
+    cursor: url("images/cursor.jpg"), auto;
+}
+.contact .img-wrap img {
+    width: 488px;
+    object-fit: contain;
+}
+.contact .contact-content .info a:hover {
+    font-weight: 900;
+}
+/* footer section styling */
+
+footer {
+    padding: 12px 0;
+    font-size: 14px;
+    font-weight: 400;
+    width: 100%;
+    background-color: #fff;
+    color: #be3455;
+    text-align: left;
+    letter-spacing: 1px;
+}
+
+footer.sticky {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+
+/* responsive media query start */
+@media (max-width: 1512px) {
+    .contact .contact-content .info a {
+        line-height: 1.2;
+    }
+    .contact-content {
+        margin-top: -50px;
+    }
+}
+
+@media (max-width: 1104px) {
+    .about-content {
+        --img-gap: 22px;
+        --img-offset: 40px;
+        gap: 40px;
+    }
+    .contact .contact-content img {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .max-width {
+        width: 90%;
+    }
+    section.contact,
+    section.about,
+    section.works,
+    .works {
+        padding: 80px 0;
+    }
+    .about-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .about-images {
+        width: 100%;
+    }
+    .contact-picture {
+        display: flex;
+        justify-content: center;
+        margin: 50px auto 0px;
+    }
+    .contact-picture img {
+        width: 30%;
+        height: auto;
+        object-fit: contain;
+    }
+    .contact .contact-content .info a {
+        font-size: 150px;
+        line-height: 1.1;
+    }
+}
+
+@media (max-width: 991px) {
+    .max-width {
+        width: 90%;
+    }
+}
+
+@media (max-width: 947px) {
+    .max-width {
+        max-width: 930px;
+    }
+    .about-content {
+        --img-offset: 30px;
+    }
+    .contact-head {
+        font-size: 40px;
+    }
+    .services .serv-content .card {
+        width: calc(50% - 10px);
+        margin-bottom: 20px;
+    }
+    .skills .skills-content .column,
+    .contact .contact-content .column {
+        width: 100%;
+        margin-bottom: 35px;
+    }
+    section {
+        padding: 80px 0;
+    }
+    .contact-content img {
+        margin-top: 50px;
+    }
+    .contact .contact-content .info a {
+        font-size: 130px;
+        line-height: 1.1;
+    }
+    .contact-picture img {
+        margin: 0;
+        width: 30%;
+    }
+    .contact-picture {
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 690px) {
+    .about-images {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .about-images img {
+        width: 100%;
+    }
+    .about-images img:nth-child(2) {
+        margin-top: 0;
+    }
+    .about-text p {
+        margin-right: 0;
+        line-height: 1.6;
+    }
+    .home .home-content .text-2 {
+        font-size: 60px;
+    }
+    .home .home-content .text-3 {
+        font-size: 32px;
+    }
+    .home .home-content a {
+        font-size: 20px;
+    }
+    .services .serv-content .card {
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .home .home-content .text-2 {
+        font-size: 50px;
+    }
+    .home .home-content .text-3 {
+        font-size: 27px;
+    }
+    .about .about-content .right .text,
+    .skills .skills-content .left .text {
+        font-size: 19px;
+    }
+    .about-text p {
+        color: #be3455;
+        font-size: 19px;
+        font-weight: 400;
+        letter-spacing: 1px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+        margin-right: 0px;
+    }
+    .contact .right form .fields {
+        flex-direction: column;
+    }
+    .contact .right form .name,
+    .contact .right form .email {
+        margin: 0;
+    }
+    .col-img-manual .col-img-manual {
+        width: 100%;
+    }
+    .contact .contact-content .icons .info a {
+        font-size: 80px;
+        letter-spacing: 1px;
+    }
+    .right form .error-box {
+        width: 150px;
+    }
+    .max-width {
+        width: 88%;
+    }
+    .about-images {
+        gap: 20px;
+    }
+    .helper {
+        display: none;
+    }
+    section.about,
+    section.contact,
+    section.works,
+    .works {
+        padding: 20px 0;
+    }
+    section.about {
+        scroll-margin-top: 50px;
+    }
+    .contact-content {
+        justify-content: center;
+        text-align: center;
+    }
+    .contact-content .icons,
+    .contact-content .info,
+    .contact-content .info.social > div {
+        width: 100%;
+        text-align: center;
+    }
+    .contact-picture img {
+        margin: 0;
+        width: 60%;
+    }
+    .contact-picture {
+        margin-top: 40px;
+    }
+    .contact-content {
+        margin-top: -10px;
+    }
+}
