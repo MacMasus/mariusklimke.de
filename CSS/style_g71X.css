@@ -1,0 +1,67 @@
+/* LuftQuart — project-specific styling.
+   Shared base + responsive rules live in /shared/project.css
+   (loaded after this file). */
+
+[class*="col-"] {
+  float: left;
+  padding: 0 30px;
+}
+
+.texts {
+  color: #be3455;
+  letter-spacing: 1px;
+  line-height: 1.6;
+}
+
+.texts .year {
+  font-size: 22px;
+  font-weight: 400;
+  margin-top: 100px;
+  margin-bottom: 75px;
+}
+
+.name {
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 120%;
+  margin-bottom: 16px;
+}
+
+.description {
+  font-size: 22px;
+  margin-bottom: 125px;
+  padding-right: 60%;
+}
+
+.head {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  font-variant: small-caps;
+}
+
+.bottom-content {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 125px;
+}
+
+/* project-specific responsive tweaks */
+@media (max-width: 1024px) {
+  .description {
+    padding-right: 26%;
+  }
+}
+
+@media (max-width: 991px) {
+  .description {
+    padding-right: 23%;
+  }
+}
+@media (max-width: 500px) {
+  /* qualified with an ancestor so it beats /shared/project.css,
+     which loads after this file with plain .description */
+  .project-content .description {
+    margin-bottom: 100px;
+  }
+}

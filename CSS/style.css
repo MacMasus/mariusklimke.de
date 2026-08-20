@@ -235,9 +235,9 @@ footer {
     font-size: 106px;
     text-align-last: center;
 }
-.contact :hover {
+/*.contact :hover {
     cursor: url("images/cursor.jpg"), auto;
-}
+}*/
 .contact .img-wrap img {
     width: 488px;
     object-fit: contain;

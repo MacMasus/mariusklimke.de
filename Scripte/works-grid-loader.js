@@ -6,7 +6,7 @@ $(document).ready(function () {
   var placeholder = document.getElementById("works-grid");
   if (!placeholder) return;
 
-  $.get("/works-grid.html", function (html) {
+  $.get("/shared/works-grid.html", function (html) {
     placeholder.innerHTML = html;
 
     // mobile-only project reordering (<500px). Masonry positions items

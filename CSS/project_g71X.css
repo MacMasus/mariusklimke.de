@@ -1,0 +1,185 @@
+/* shared/project.css
+   Shared base + responsive styles for every project page.
+
+   IMPORTANT: load this AFTER the project's own style.css, e.g.
+     <link rel="stylesheet" href="style.css" />
+     <link rel="stylesheet" href="/shared/project.css" />
+   The @media overrides below intentionally win over each project's
+   base values via source order.
+
+   Per-project design values stay in each project's local style.css:
+   [class*="col-"] padding, .texts, .texts .year, .name, .description,
+   .head, .bottom-content, .at, and any image/layout one-offs. */
+
+/* import google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
+
+* {
+  box-sizing: border-box;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/* grid column widths (column padding is per-project, in style.css) */
+.col-1 {
+  width: 8.33%;
+}
+.col-2 {
+  width: 16.66%;
+}
+.col-3 {
+  width: 25%;
+}
+.col-4 {
+  width: 33.33%;
+}
+.col-5 {
+  width: 41.66%;
+}
+.col-6 {
+  width: 50%;
+}
+.col-7 {
+  width: 58.33%;
+}
+.col-8 {
+  width: 66.66%;
+}
+.col-9 {
+  width: 75%;
+}
+.col-10 {
+  width: 83.33%;
+}
+.col-11 {
+  width: 91.66%;
+}
+.col-12 {
+  width: 100%;
+}
+
+/* custom scroll bar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* shared layout */
+section {
+  padding: 100px 0;
+}
+.max-width {
+  max-width: 1750px;
+  width: 91%;
+  margin: auto;
+}
+.project,
+.works {
+  font-family: "Figtree", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+.project-content::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.project-content .picture img {
+  width: 100%;
+  object-fit: cover;
+}
+.division {
+  color: #be3455;
+  font-size: 100px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-top: 100px;
+  text-align: center;
+  font-variant: small-caps;
+}
+
+/* responsive media query start */
+@media (max-width: 1104px) {
+  .project .project-content .picture img {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .max-width {
+    width: 94%;
+  }
+}
+
+@media (max-width: 991px) {
+  .max-width {
+    width: 94%;
+  }
+}
+
+@media (max-width: 947px) {
+  .max-width {
+    max-width: 930px;
+  }
+}
+
+@media (max-width: 690px) {
+  .works .works-content .text-2 {
+    font-size: 60px;
+  }
+  .works .works-content .text-3 {
+    font-size: 32px;
+  }
+  .works .works-content a {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .texts .year {
+    font-size: 19px;
+    font-weight: 400;
+    margin-top: 100px;
+    margin-bottom: 50px;
+  }
+  .name {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 120%;
+    margin-bottom: 16px;
+  }
+  .description {
+    font-size: 19px;
+    line-height: 1.5;
+    margin-bottom: 40px;
+    padding-right: 1%;
+  }
+  .at {
+    color: #be3455;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 100px;
+  }
+  .works .works-content .text-2 {
+    font-size: 50px;
+  }
+  .works .works-content .text-3 {
+    font-size: 27px;
+  }
+  .max-width {
+    width: 88%;
+  }
+}
