@@ -29,7 +29,7 @@ $(document).ready(function () {
         marker.replaceWith(b);
       };
 
-      swapItems(gridItem("/puncher"), gridItem("/billennium"));
+      swapItems(gridItem("/LuftQuart"), gridItem("/KeinMenschistIllegal"));
 
       // put woom above randoms
       var randoms = gridItem("/randoms");

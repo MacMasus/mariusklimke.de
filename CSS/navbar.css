@@ -27,7 +27,7 @@
     line-height: 1.1;
 }
 .navbar .logo a {
-    color: #be3455;
+    color: #59c895;
     font-size: 40px;
     font-weight: 700;
     letter-spacing: 1px;
@@ -42,12 +42,12 @@
     transform: translateY(0);
 }
 .navbar .logo a span {
-    color: #be3455;
+    color: #59c895;
     transition: all 0.3s ease;
 }
 .navbar.sticky .logo a,
 .navbar.sticky .logo a span {
-    color: #be3455;
+    color: #59c895;
     font-size: 20px;
     letter-spacing: 1px;
 }
@@ -58,7 +58,7 @@
 }
 .navbar .menu li a {
     display: block;
-    color: #be3455;
+    color: #59c895;
     font-size: 20px;
     font-weight: 400;
     margin-left: 25px;
@@ -70,12 +70,12 @@
 .navbar .menu li a.menu-btn.contact-active[href$="#contact"],
 .navbar .menu li a:hover,
 .navbar.sticky .menu li a:hover {
-    color: #be3455;
+    color: #59c895;
     font-weight: 900;
 }
 
 .menu-btn {
-    color: #be3455;
+    color: #59c895;
     cursor: pointer;
     display: none;
 }
@@ -101,7 +101,7 @@ span.close {
     right: max(30px, calc(50% - 1750px * 0.91 / 2));
     text-align: center;
     line-height: 45px;
-    color: #be3455;
+    color: #59c895;
     z-index: 9999;
     font-size: 90px;
     border-radius: 6px;
@@ -164,7 +164,7 @@ span.close {
         width: 100%;
         left: 0;
         top: 0;
-        background: #be3455;
+        background: #59c895;
         text-align: center;
         display: flex;
         line-height: 1.1;

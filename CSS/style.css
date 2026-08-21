@@ -168,7 +168,7 @@ footer {
     flex: 1;
 }
 .about-text p {
-    color: #be3455;
+    color: #59c895;
     font-size: 20px;
     font-weight: 400;
     letter-spacing: 1px;
@@ -223,7 +223,7 @@ footer {
     bottom: 0;
 }
 .contact .contact-content .info {
-    color: #be3455;
+    color: #59c895;
     font-size: 24px;
     font-weight: 400;
     letter-spacing: 1px;
@@ -231,7 +231,7 @@ footer {
     text-align: center;
 }
 .contact .contact-content .info a {
-    color: #be3455;
+    color: #59c895;
     font-size: 106px;
     text-align-last: center;
 }
@@ -253,7 +253,7 @@ footer {
     font-weight: 400;
     width: 100%;
     background-color: #fff;
-    color: #be3455;
+    color: #59c895;
     text-align: left;
     letter-spacing: 1px;
 }
@@ -403,7 +403,7 @@ footer.sticky {
         font-size: 19px;
     }
     .about-text p {
-        color: #be3455;
+        color: #59c895;
         font-size: 19px;
         font-weight: 400;
         letter-spacing: 1px;
