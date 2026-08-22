@@ -96,7 +96,7 @@ span.close {
     position: fixed;
     height: 45px;
     width: 42px;
-    background: 111;
+    background: transparent;
     bottom: 30px;
     right: max(30px, calc(50% - 1750px * 0.91 / 2));
     text-align: center;
