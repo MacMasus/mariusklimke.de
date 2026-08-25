@@ -32,8 +32,20 @@ planet (systemd)
 | `mariusklimke-deploy-webhook.service` | systemd unit running `webhook.py` (root, so `systemctl start` works without a password). |
 | `mariusklimke-deploy.service` | systemd **oneshot** unit running `deploy.sh` as user `deploy` (owns the docroot). |
 | `deploy.sh` | Pulls the `built` branch tarball and rsyncs it into `/opt/http/mariusklimke.de/`. |
+| `provision.sh` | One-shot, idempotent installer for everything above (run as root on planet). |
 
 ## Provisioning on planet (one-time)
+
+**One-shot (recommended):** copy this `deploy/` directory to planet and run as root:
+
+```bash
+sudo bash deploy/provision.sh --dry-run   # review first
+sudo bash deploy/provision.sh             # apply (idempotent, preserves existing token)
+```
+
+The script installs the receiver + units + deploy script, generates the token
+(prints it for the GitHub secret), appends the Caddy block and reloads Caddy.
+Manual equivalent (for reference):
 
 ```bash
 # 1. App dir + receiver
@@ -42,18 +54,22 @@ sudo install -m 0755 deploy/webhook.py /opt/apps/mariusklimke/webhook.py
 sudo install -m 0644 deploy/mariusklimke-deploy-webhook.service /etc/systemd/system/
 sudo install -m 0644 deploy/mariusklimke-deploy.service /etc/systemd/system/
 sudo install -m 0755 deploy/deploy.sh /opt/apps/mariusklimke/deploy.sh
+sudo chown deploy:deploy /opt/apps/mariusklimke/deploy.sh
 
 # 2. Shared secret (same value as the GitHub repo secret DEPLOY_TOKEN)
-#    owner root:webhook-access, readable by root only
-echo '<random token, e.g. openssl rand -hex 32>' | sudo tee /opt/apps/mariusklimke/webhook-token > /dev/null
-sudo chmod 600 /opt/apps/mariusklimke/webhook-token
+#    owner root:root, mode 600
+sudo sh -c 'umask 077; openssl rand -hex 32 > /opt/apps/mariusklimke/webhook-token'
 
-# 3. Caddy block (in the live Caddyfile, e.g. /home/momo/Caddyfile):
+# 3. Caddy block (in the live Caddyfile /home/momo/Caddyfile):
 #    deploy.mariusklimke.de {
 #        reverse_proxy 127.0.0.1:18793
 #    }
-#    + DNS: A record deploy.mariusklimke.de → planet (65.21.27.234)
-sudo caddy reload --config /home/momo/Caddyfile   # or however Caddy is managed here
+#    Caddy runs as docker container `mellon-caddy` (host network, Cloudflare
+#    DNS-01 ACME). 127.0.0.1 reaches the host receiver. Validate + reload:
+sudo docker exec mellon-caddy caddy validate --config /etc/caddy/Caddyfile
+sudo docker exec mellon-caddy caddy reload --config /etc/caddy/Caddyfile
+#    + DNS: A record deploy.mariusklimke.de → 65.21.27.234 (Cloudflare, same
+#      account that already issues the site certs — zone is NOT in /lab terraform)
 
 # 4. Enable + start
 sudo systemctl daemon-reload
