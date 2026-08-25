@@ -1,0 +1,5 @@
+# Node build tooling
+node_modules/
+
+# Local progress notes (not part of the site)
+progress-*.md
