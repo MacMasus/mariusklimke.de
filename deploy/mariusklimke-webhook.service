@@ -6,7 +6,7 @@ Wants=network-online.target
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/bin/python3 /opt/apps/mariusklimke/webhook.py
+ExecStart=/usr/bin/python3 /opt/mariusklimke-deploy/webhook.py
 Restart=on-failure
 RestartSec=2
 

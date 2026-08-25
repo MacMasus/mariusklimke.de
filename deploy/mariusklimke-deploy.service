@@ -8,6 +8,6 @@ Type=oneshot
 # Runs as the `deploy` user: it owns /opt/http/mariusklimke.de (the same user
 # the previous rsync-based deploy used).
 User=deploy
-ExecStart=/opt/apps/mariusklimke/deploy.sh
+ExecStart=/opt/mariusklimke-deploy/deploy.sh
 StandardOutput=journal
 StandardError=journal

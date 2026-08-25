@@ -8,24 +8,23 @@ and rsyncs it into the docroot /opt/http/mariusklimke.de). This is the HTTPS
 target used by the GitHub Actions workflow (.github/workflows/deploy.yml) so a
 push to `main` deploys immediately.
 
-The shared secret lives in /opt/apps/mariusklimke/webhook-token (NOT in git);
-GitHub holds the same value as the `DEPLOY_TOKEN` repository secret.
+The shared secret lives in /etc/mariusklimke/deploy.token (NOT in git); GitHub
+holds the same value as the `DEPLOY_TOKEN` repository secret. Provisioning is
+done via the Ansible role `ansible/roles/mariusklimke` in this repo (see
+docs/RUNBOOK.md) — not manually.
 
 Improvement over the openclaw receiver: binds 127.0.0.1 (Caddy reverse-proxies
 the public subdomain), per the recommendation in
 openclaw-deploy/docs/deployment-review.md.
 
-Run as root (needs `systemctl start` without password):
-  install -m 0755 deploy/webhook.py /opt/apps/mariusklimke/webhook.py
-  install -m 0644 deploy/mariusklimke-deploy-webhook.service /etc/systemd/system/
-  systemctl daemon-reload && systemctl enable --now mariusklimke-deploy-webhook.service
+Run as root (needs `systemctl start` without password).
 """
 
 import hmac
 import subprocess
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
-TOKEN_FILE = "/opt/apps/mariusklimke/webhook-token"
+TOKEN_FILE = "/etc/mariusklimke/deploy.token"
 PORT = 18793
 
 
