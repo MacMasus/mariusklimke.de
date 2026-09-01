@@ -32,6 +32,7 @@
     font-weight: 700;
     letter-spacing: 1px;
     display: inline-block;
+    text-transform: uppercase;
 }
 .navbar .logo .anim-char {
     display: inline-block;
