@@ -1,0 +1,89 @@
+name: Build & Deploy
+
+# On every push to main: build the optimized/minified site, publish it to the
+# `built` branch and trigger the deploy webhook on the server.
+#
+# Deploy model (no SSH keys):
+#   CI build → POST https://deploy.mariusklimke.de/deploy (Bearer DEPLOY_TOKEN)
+#           → server-side receiver → systemd oneshot → deploy.sh pulls the
+#             `built` branch and rsyncs it into the Caddy docroot
+#             (/opt/http/mariusklimke.de).
+#
+# Runs on the self-hosted GitHub Actions runner on planet (user `runner`).
+#
+# Required repository secret (Settings → Secrets and variables → Actions):
+#   - DEPLOY_TOKEN: shared secret, must equal the deploy token on the server
+#     (see /etc/mariusklimke/deploy.token)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write # push the `built` branch
+
+jobs:
+  build-and-deploy:
+    runs-on: [self-hosted, Linux, X64]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: scripts/package-lock.json
+
+      - name: Install build tooling
+        run: npm ci --no-audit --no-fund
+        working-directory: scripts
+
+      - name: Optimize images (AVIF/WebP via sharp)
+        run: node scripts/optimize-images.mjs
+
+      - name: Generate favicons
+        run: node scripts/generate-favicons.mjs
+
+      - name: Add responsive <picture> markup
+        run: node scripts/add-picture.mjs
+
+      - name: Minify HTML/CSS/JS (tdewolff/minify)
+        run: |
+          set -e
+          curl -sL -o /tmp/minify.tar.gz \
+            https://github.com/tdewolff/minify/releases/download/v2.24.17/minify_linux_amd64.tar.gz
+          tar -xzf /tmp/minify.tar.gz -C /tmp minify
+          chmod +x /tmp/minify
+          # Caddy serves index.html as directory index; the source file is
+          # named Website_Marius.html, so publish it under index.html too.
+          cp Website_Marius.html index.html
+          /tmp/minify -r \
+            --match '*.html' --match '*.css' --match '*.js' \
+            --exclude '.git/**' --exclude '.github/**' \
+            --exclude 'scripts/**' --exclude 'deploy/**' \
+            -i .
+
+      - name: Sanity check built output
+        run: |
+          test -f index.html || { echo "index.html missing"; exit 1; }
+          test -f shared/works-grid.html || { echo "shared/works-grid.html missing"; exit 1; }
+          test -f photomarius.jpg || { echo "photomarius.jpg missing"; exit 1; }
+          echo "built output OK"
+
+      - name: Publish built output to `built` branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B built
+          git add -A
+          git commit -m "build: $(date -u +'%Y-%m-%d %H:%M UTC')" --allow-empty
+          git push --force origin built
+
+      - name: Trigger deploy webhook
+        run: |
+          curl -fsS -X POST \
+            -H "Authorization: Bearer ${{ secrets.DEPLOY_TOKEN }}" \
+            "https://deploy.mariusklimke.de/deploy"
