@@ -98,6 +98,7 @@ section {
 }
 .project-content .picture img {
   width: 100%;
+  height: auto;
   object-fit: cover;
 }
 .division {

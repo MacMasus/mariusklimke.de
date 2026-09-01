@@ -164,6 +164,21 @@ footer {
 .about-images img:nth-child(2) {
     margin-top: var(--img-offset);
 }
+/* Our build pipeline wraps the About images in <picture> (AVIF/WebP). The
+   <picture> then becomes the flex item of .about-images, so it must carry the
+   sizing; the <img> fills it. Keeps the rendered layout identical to the
+   original markup (verified in Chrome: 318x565 / 318x424 @1600px). */
+.about-images picture {
+    width: calc(50% - var(--img-gap) / 2);
+    flex-shrink: 0;
+}
+.about-images picture img {
+    width: 100%;
+    height: auto;
+}
+.about-images picture:nth-child(2) {
+    margin-top: var(--img-offset);
+}
 .about-text {
     flex: 1;
 }
@@ -370,8 +385,12 @@ footer.sticky {
     .about-images img {
         width: 100%;
     }
-    .about-images img:nth-child(2) {
+    .about-images img:nth-child(2),
+    .about-images picture:nth-child(2) {
         margin-top: 0;
+    }
+    .about-images picture {
+        width: 100%;
     }
     .about-text p {
         margin-right: 0;
